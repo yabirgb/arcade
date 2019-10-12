@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+  <div class='post-title'>
+    {{title}}
+  </div>
+  <div class='meta'>
+    <time datetime='created'>
+      {{ created_human }}
+    </time>
+  </div>
+  <div class='markdown'>
+    {{ body }}
+  </div>
+{% endblock content %}

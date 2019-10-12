@@ -1,8 +1,13 @@
+from datetime import datetime
 from typing import List, Dict, Union, Tuple
 import os
+
 import yaml
+from jinja2 import BaseLoader, TemplateNotFound
+
 from definitions import required_folders
 from errors import MissingArcadeProject
+
 
 
 def list_content(base_folder: str, contents: str = "contents") -> List[Tuple[str, str]]:
@@ -30,3 +35,26 @@ def check_arcade_project(path):
     """
 
     pass
+
+
+class Post:
+
+    def __init__(self, path, html, meta, index=False):
+
+        self.path = path
+        self.html = html
+        self.meta = meta
+        self.date_human = meta.get('date')[0]
+        self.date = datetime.strptime(self.date_human,"%d-%m-%Y")
+        self.is_index = index
+        
+    def to_dict(self):
+
+        return {
+            'post': self.html,
+            'title': self.meta.get('title')[0],
+            'created': self.date,
+            'created_human': self.date_human,
+            'slug': self.meta.get('slug'),
+            'social': {}
+        }

@@ -2,8 +2,10 @@ import click
 import os
 from livereload import Server, shell
 from create_artifacts import create_config_file, generate_folder_structure
-from parsing import build_content
+from parsing import build_content, render_content
 
+
+theme = 'themes/baseline'
 
 @click.command()
 def init() -> None:
@@ -21,7 +23,8 @@ def init() -> None:
 @click.command()
 def build() -> None:
     base_path = os.getcwd()
-    build_content(base_path)
+    content = build_content(base_path)
+    render_content(base_path, content, theme)
 
 
 @click.command()

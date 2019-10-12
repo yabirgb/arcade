@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{{title}}</title>
+    {% block head %}
+    {% endblock head %}
+  </head>
+  <body>
+    {% block content %}
+    {% endblock content %}
+    {% block footer %}
+    <footer>
+      {% for social in social_links %}
+      <a href="social.link"><i class="fa {{social.icon}}" aria-hidden="true"></i></a>
+      {% endfor %}
+    </footer>
+    {% endblock footer %}
+  </body>
+</html>
