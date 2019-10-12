@@ -67,7 +67,12 @@ social:
     url: 'https://twitter.com/yabirgb'
 ```
 
-3. Build or create your edit 
+3. Create a index file
+
+Go to the `content` and create an file called `index.md`. This will
+be the entry point to your blog
+
+4. Build or watch your project
 
 ```
 arcade build

@@ -1,0 +1,7 @@
+  <footer>
+    {% for net, social in config.social.items() %}
+      {% if social != None %}
+	<a href="{{social.url}}"><i class="fa {{social.icon}}" aria-hidden="true"></i></a>
+      {% endif %}
+    {% endfor %}
+  </footer>
