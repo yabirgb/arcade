@@ -28,7 +28,7 @@ def build() -> None:
 
 
 @click.command()
-def watch(content_folder) -> None:
+def watch() -> None:
     """
     Start a developing server for your content
     """
@@ -36,7 +36,9 @@ def watch(content_folder) -> None:
     # Get where the execution is being made
     calling_path = os.getcwd()
 
+    content_folder = os.path.join(calling_path, 'public')
+
     # Initialize the dev server
     server = Server()
-    server.watch(content_folder, shell("arcade build", cwd=calling_path))
+    server.watch(content_folder, shell("python arcade/main.py build", cwd=calling_path))
     server.serve(root="public")
