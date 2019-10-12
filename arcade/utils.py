@@ -45,8 +45,18 @@ class Post:
         self.path = path
         self.html = html
         self.meta = meta
-        self.date_human = meta.get('date')[0]
-        self.date = datetime.strptime(self.date_human,"%d-%m-%Y")
+        self.date_human = meta.get('date')
+        self.date = None
+
+        if self.date_human:
+            self.date_human = self.data_human[0]
+            self.date = datetime.strptime(self.date_human,"%d-%m-%Y")
+
+        if self.meta.get('title'):
+            self.title = self.meta.get('title')[0]
+        else:
+            self.title = ''
+            
         self.is_index = index
         self.config = config
         
@@ -54,7 +64,7 @@ class Post:
 
         return {
             'post': self.html,
-            'title': self.meta.get('title')[0],
+            'title': self.title,
             'created': self.date,
             'created_human': self.date_human,
             'slug': self.meta.get('slug'),
