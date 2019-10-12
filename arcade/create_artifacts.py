@@ -22,7 +22,6 @@ def generate_folder_structure(
 
 def create_config_file(
     base_path: str,
-    mini_config: Dict[str, Union[Dict, str, int]],
     name: str = "arcade.yaml",
 ) -> None:
     config = {

@@ -3,7 +3,7 @@ import os
 from livereload import Server, shell
 from create_artifacts import create_config_file, generate_folder_structure
 from parsing import build_content, render_content, copy_static_assets
-from utils import load_config_file
+from utils import load_config_file, copytree
 
 @click.command()
 def init() -> None:
@@ -13,6 +13,11 @@ def init() -> None:
     # create side effects
     generate_folder_structure(calling_path)
     create_config_file(calling_path)
+
+    # Copy basic theme
+    local_path = os.path.dirname(os.path.abspath(__file__))
+    copytree(os.path.join(local_path,'themes/baseline'), os.path.join(calling_path, 'themes', 'baseline'))
+    
     click.echo("Project created! Modify the arcade.yaml configuration file")
 
 
