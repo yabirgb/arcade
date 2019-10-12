@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block content %}
+  {% if config.page_name %}
+    <h1>{{config.page_name}}</h1>
+  {% endif %}
+  
+  {{post}}
+
+  <h3>Latest Posts</h3>
+  <ul class='post-list'>
+    {% for post in posts %}
+      <li clas='post-item'>
+	<span class='meta'>
+	  <time datetime='post.created'>
+	    {{ post.created_human }}
+	  </time>
+	</span>
+	<a href='{{post.slug}}/'>{{ post.title }}</a>
+      </li>
+    {% endfor %}
+  </ul>
+{% endblock content %}

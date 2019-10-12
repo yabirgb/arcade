@@ -26,9 +26,10 @@ def create_config_file(
     name: str = "arcade.yaml",
 ) -> None:
     config = {
-        "page_name": mini_config["page_name"],
-        "base_path": "",
-        "author_name": "",
+        "page_name": '',
+        "base_path": '',
+        "author_name": '',
+        "theme": 'themes/baseline',
         "social": {
             "twitter": None,
             "github": None,
