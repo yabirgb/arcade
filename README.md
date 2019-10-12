@@ -30,3 +30,7 @@ arcade watch
 ```
 
 Made with :heart: and :snake: by Yábir Benchakhtir
+
+## Credit
+
+Photo by [@hartmuttobies](https://unsplash.com/@hartmuttobies)
