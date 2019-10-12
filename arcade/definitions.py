@@ -5,4 +5,5 @@ required_folders = {
     "static": "static",
     "public": "public",
     "themes": "themes",
+    "themes/baseline": "themes/baseline"
 }
