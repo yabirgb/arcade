@@ -1,6 +1,7 @@
 from datetime import datetime
 from typing import List, Dict, Union, Tuple
 import os
+import shutil
 
 import yaml
 from jinja2 import BaseLoader, TemplateNotFound
@@ -39,7 +40,7 @@ def check_arcade_project(path):
 
 class Post:
 
-    def __init__(self, path, html, meta, index=False):
+    def __init__(self, path, html, meta, config={}, index=False):
 
         self.path = path
         self.html = html
@@ -47,6 +48,7 @@ class Post:
         self.date_human = meta.get('date')[0]
         self.date = datetime.strptime(self.date_human,"%d-%m-%Y")
         self.is_index = index
+        self.config = config
         
     def to_dict(self):
 
@@ -56,5 +58,26 @@ class Post:
             'created': self.date,
             'created_human': self.date_human,
             'slug': self.meta.get('slug'),
-            'social': {}
+            'config': self.config
         }
+
+
+def copytree(src, dst, symlinks=False, ignore=None):
+    for item in os.listdir(src):
+        s = os.path.join(src, item)
+        d = os.path.join(dst, item)
+        if os.path.isdir(s):
+            shutil.copytree(s, d, symlinks, ignore)
+        else:
+            shutil.copy2(s, d)
+
+def load_config_file(base_path) -> Dict:
+    """
+    Load configuration for page creation
+    """
+    
+    data = {}
+    with open(os.path.join(base_path, 'arcade.yaml')) as f:
+        data = yaml.load(f, Loader=yaml.FullLoader)
+
+    return data

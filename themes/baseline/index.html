@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% block content %}
-
+  {% if config.page_name %}
+    <h1>{{config.page_name}}</h1>
+  {% endif %}
+  
   {{post}}
 
   <h3>Latest Posts</h3>
@@ -17,4 +20,3 @@
     {% endfor %}
   </ul>
 {% endblock content %}
-
