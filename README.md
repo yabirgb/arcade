@@ -16,6 +16,11 @@ The porpouse in life for this project is to create a cool static site for my blo
 - Live reload while editing
 - Customizable paths
 
+## Installation
+
+```
+pip install arcade-generator
+```
 
 ## Commands
 
