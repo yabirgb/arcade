@@ -49,7 +49,7 @@ class Post:
         self.date = None
 
         if self.date_human:
-            self.date_human = self.data_human[0]
+            self.date_human = self.date_human[0]
             self.date = datetime.strptime(self.date_human,"%d-%m-%Y")
 
         if self.meta.get('title'):
@@ -70,6 +70,9 @@ class Post:
             'slug': self.meta.get('slug'),
             'config': self.config
         }
+
+    def __lt__(self, x):
+        return self.date < x.date
 
 
 def copytree(src, dst, symlinks=False, ignore=None):

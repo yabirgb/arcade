@@ -79,7 +79,8 @@ def render_content(base_path:str,
             
             # TODO: Overwrite this hardcoded constant
             get = min(len(data), 10)
-            post_data['posts'] = [x.to_dict() for x in data[:get] if not x.is_index]
+            post_data['posts'] = [x.to_dict() for x in
+                                  sorted(data[:get], reverse=True) if not x.is_index]
 
             render = index_tmpl.render(post_data)
             
