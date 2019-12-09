@@ -22,17 +22,25 @@ def build_content(base_path: str) -> List[Post]:
 
     html_path = os.path.join(base_path, required_folders["public"])
     result = []
+
+    # iterate over pairs file name and file path
     for filen, file_path in list_content(base_path, required_folders["content"]):
+        # Open the file
         with open(file_path, "r") as f:
+            # load markdown
             md = markdown.Markdown(extensions = ['meta', 'tables', 'sane_lists'])
+            # Read document
             data = f.read()
+            # Convert markdown to html
             html = md.convert(data)
 
+            # Get file extension
             filenn, extension = os.path.splitext(filen)
 
+            # If it's not md skip file
             if extension != '.md':
                 continue
-        
+            
             if 'index' in filen:
                 result.append( Post(
                     path = os.path.join(html_path, "index.html"),
@@ -40,7 +48,7 @@ def build_content(base_path: str) -> List[Post]:
                     meta = md.Meta,
                     config = configuration,
                     index = True
-                    )
+                )
                 )
             else:
                 if 'slug' in md.Meta.keys():
@@ -55,7 +63,7 @@ def build_content(base_path: str) -> List[Post]:
                     html = html,
                     meta = md.Meta,
                     config = configuration
-                    )
+                )
                 )
     return result
 
@@ -65,6 +73,9 @@ def render_content(base_path:str,
 
     env = Environment()
     env.loader = FileSystemLoader(os.path.join(base_path, template_folder))
+
+    index_folder = None
+    index_config = dict()
 
     # Create the posts html files
     tmpl = env.get_template('post.html')
@@ -84,19 +95,32 @@ def render_content(base_path:str,
 
             render = index_tmpl.render(post_data)
             
+            index_folder = folder_path
+            index_config = post.config
+            
         else:
             render = tmpl.render(post_data)
 
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
-        
+            
         with open(post.path, 'w') as f:
             f.write(render)
 
     # Create the history of posts
 
-    # Create the index page
+    history = env.get_template("full_list.html")
+    content=dict()
+    content['posts'] = list(map(lambda x: x.to_dict(), [x for x in reversed(data) if not x.is_index]))
+    content['config'] = index_config
+    render = history.render(content)
 
+    if not os.path.exists(os.path.join(index_folder, 'history')):
+        os.makedirs(os.path.join(index_folder, 'history'))
+
+    with open(os.path.join(os.path.join(index_folder, 'history'), 'index.html'), 'w') as f:
+        f.write(render)
+        
 def copy_static_assets(base_path, theme_folder):
 
     dest = os.path.join(base_path, 'public', 'static')

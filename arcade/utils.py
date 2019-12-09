@@ -23,7 +23,6 @@ def list_content(base_folder: str, contents: str = "contents") -> List[Tuple[str
     contents = []
 
     for root, folders, files in os.walk(path):
-
         for filen in files:
             contents.append((filen, os.path.join(root, filen)))
 
@@ -73,6 +72,9 @@ class Post:
 
     def __lt__(self, x):
         return self.date < x.date
+
+    def __str__(self):
+        return f'{self.title}'
 
 
 def copytree(src, dst, symlinks=False, ignore=None):
