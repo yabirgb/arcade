@@ -1,4 +1,10 @@
 {% extends 'base.html' %}
+{% block head %}
+<meta property="og:title" content="{{config.page_name}}"/>
+<meta property="og:description" content="{{title}}" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{config.base_path}}/{{slug}}" />
+{% endblock head%}
 {% block content %}
 <div class="post-page">  
   <h1>{{title}}</h1>
