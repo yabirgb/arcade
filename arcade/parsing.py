@@ -6,7 +6,7 @@ from jinja2.environment import Environment
 from utils import list_content, copytree, load_config_file, Post
 from definitions import required_folders
 import shutil
-
+import distutils.dir_util
 
 def build_content(base_path: str) -> List[Post]:
     """
@@ -129,11 +129,14 @@ def copy_static_assets(base_path, theme_folder):
     orig = os.path.join(base_path, theme_folder, 'static')
     if not os.path.exists(dest):
         os.makedirs(dest)
+    else:
+        pass
+        #shutil.rmtree(dest)
 
     copytree(orig,dest)
     # copy files from static folder
     orig = os.path.join(base_path, 'static')
-    copytree(orig,dest)
+    distutils.dir_util.copy_tree(orig,dest)
     
         
 

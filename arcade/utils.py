@@ -8,6 +8,7 @@ from jinja2 import BaseLoader, TemplateNotFound
 
 from definitions import required_folders
 from errors import MissingArcadeProject
+import distutils.dir_util
 
 
 
