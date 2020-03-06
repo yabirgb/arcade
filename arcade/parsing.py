@@ -5,6 +5,7 @@ from jinja2 import FileSystemLoader
 from jinja2.environment import Environment
 from utils import list_content, copytree, load_config_file, Post
 from definitions import required_folders
+import shutil
 
 
 def build_content(base_path: str) -> List[Post]:
@@ -28,7 +29,7 @@ def build_content(base_path: str) -> List[Post]:
         # Open the file
         with open(file_path, "r") as f:
             # load markdown
-            md = markdown.Markdown(extensions = ['meta', 'tables', 'sane_lists'])
+            md = markdown.Markdown(extensions = ['meta', 'tables', 'sane_lists', 'attr_list'])
             # Read document
             data = f.read()
             # Convert markdown to html
@@ -123,9 +124,16 @@ def render_content(base_path:str,
         
 def copy_static_assets(base_path, theme_folder):
 
+    # copy files from theme folder
     dest = os.path.join(base_path, 'public', 'static')
     orig = os.path.join(base_path, theme_folder, 'static')
     if not os.path.exists(dest):
         os.makedirs(dest)
-        
+
     copytree(orig,dest)
+    # copy files from static folder
+    orig = os.path.join(base_path, 'static')
+    copytree(orig,dest)
+    
+        
+

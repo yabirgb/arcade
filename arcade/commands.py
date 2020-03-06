@@ -40,6 +40,7 @@ def watch() -> None:
     theme = load_config_file(base_path)['theme']
     
     content_folder = os.path.join(base_path, 'content')
+    theme_folder = os.path.join(base_path, 'themes')
 
     # Initialize the dev server
     server = Server()
@@ -50,4 +51,5 @@ def watch() -> None:
     copy_static_assets(base_path, theme)
     
     server.watch(content_folder, shell("python arcade/main.py build", cwd=base_path))
+    server.watch(theme_folder, shell("python arcade/main.py build", cwd=base_path))
     server.serve(root="public")
