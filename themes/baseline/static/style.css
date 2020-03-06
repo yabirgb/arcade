@@ -5,10 +5,15 @@
 #eeeeee
 */
 
+html, body {
+  height: 100%; 
+}
+
 body{
     background-color:#222831;
     color: #fff;
     text-rendering: optimizeLegibility !important;
+    font-family: 'Merriweather', serif;
 }
 
 h1{
@@ -39,7 +44,7 @@ pre{
     text-decoration:none;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 900px) {
     .post-page{
         display:flex;
         flex-wrap:wrap;
@@ -49,9 +54,15 @@ pre{
         margin: auto;
     }
 
+    #index-content{
+        display:flex;
+        flex-wrap:wrap;
+        flex-direction:column;
+    }
+
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 900px) {
     .post-page{
         display:flex;
         flex-wrap:wrap;
@@ -59,5 +70,17 @@ pre{
         max-width:95%;
         margin: auto;
     }
+
+    #index-content{
+        display:flex;
+        flex-wrap:wrap;
+        flex-direction:column;
+        
+    }
+    #index-content > a{
+        font-size: large;
+    }
+
+    
 }
 

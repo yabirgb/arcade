@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block head %}
+<meta property="og:title" content="{{config.page_name}}"/>
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="{{config.base_path}}" />
+{% endblock head%}
+{% block content %}
+  <div id="index-content">
+  {% if config.page_name %}
+    <h1 class="title">{{config.page_name}}</h1>
+  {% endif %}
+  
+  {{post}}
+
+  <h3>Latest Posts</h3>
+  <ul id='post-list'>
+    {% for post in posts %}
+    <li clas='post-item'>
+      <a href='{{post.slug}}/'>{{ post.title }}</a>
+	  <span class='meta'>
+	    <time datetime='post.created'>
+	      {{ post.created_human }}
+	    </time>
+	  </span>  
+    </li>
+    {% endfor %}
+  </ul>
+
+  <a href="/history">See more...</a>
+  </div>
+{% endblock content %}
