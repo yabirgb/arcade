@@ -12,6 +12,7 @@
   
   {{post}}
 
+  {% if posts  %}
   <h3>Latest Posts</h3>
   <ul id='post-list'>
     {% for post in posts %}
@@ -27,4 +28,5 @@
   </ul>
 
   <a href="/history">See more...</a>
+  {% endif %}
 {% endblock content %}
