@@ -19,6 +19,7 @@ def init() -> None:
     #copytree(os.path.join(local_path,'themes/baseline'), os.path.join(calling_path, 'themes', 'baseline'))
     
     click.echo("Project created! Modify the arcade.yaml configuration file")
+    click.echo("Don't forget to download a theme for your blog before starting. Visit https://github.com/yabirgb/arcade for more info")
 
 
 @click.command()
