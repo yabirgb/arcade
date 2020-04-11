@@ -5,7 +5,7 @@ from definitions import required_folders
 
 
 def generate_folder_structure(
-    base_path: str, folders=required_folders.values()
+    base_path: str, folders=required_folders
 ) -> None:
     """
     Create folder structure of arcade in the
@@ -16,8 +16,14 @@ def generate_folder_structure(
         if not os.path.exists(path):
             os.makedirs(path)
 
-    for folder in folders:
+    for folder in folders.values():
         create_folder(os.path.join(base_path, folder))
+
+    # create index file
+    with open(os.path.join(base_path, folders["content"], 'index.md'), 'w') as f:
+        f.write("# Welcome to the arcade")
+
+    
 
 
 def create_config_file(

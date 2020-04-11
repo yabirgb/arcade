@@ -16,9 +16,10 @@ def init() -> None:
 
     # Copy basic theme
     local_path = os.path.dirname(os.path.abspath(__file__))
-    copytree(os.path.join(local_path,'themes/baseline'), os.path.join(calling_path, 'themes', 'baseline'))
+    #copytree(os.path.join(local_path,'themes/baseline'), os.path.join(calling_path, 'themes', 'baseline'))
     
     click.echo("Project created! Modify the arcade.yaml configuration file")
+    click.echo("Don't forget to download a theme for your blog before starting. Visit https://github.com/yabirgb/arcade for more info")
 
 
 @click.command()
@@ -50,6 +51,6 @@ def watch() -> None:
     render_content(base_path, content, theme)
     copy_static_assets(base_path, theme)
     
-    server.watch(content_folder, shell("python arcade/main.py build", cwd=base_path))
-    server.watch(theme_folder, shell("python arcade/main.py build", cwd=base_path))
+    server.watch(content_folder, shell("arcade build", cwd=base_path))
+    server.watch(theme_folder, shell("arcade build", cwd=base_path))
     server.serve(root="public")

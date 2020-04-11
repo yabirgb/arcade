@@ -78,6 +78,10 @@ arcade build
 arcade watch
 ```
 
+## Themes
+
+Currently only the baseline theme is available. You can download it [here](https://github.com/yabirgb/arcade/releases/download/0.0.5/baseline.zip)
+
 Made with :heart: and :snake: by Yábir Benchakhtir
 
 ## Credit

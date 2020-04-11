@@ -92,7 +92,7 @@ def render_content(base_path:str,
             # TODO: Overwrite this hardcoded constant
             get = min(len(data), 10)
             post_data['posts'] = [x.to_dict() for x in
-                                  sorted(data[:get], reverse=True) if not x.is_index]
+                                  sorted([x for x in data if not x.is_index][:get], reverse=True) if not x.is_index]
 
             render = index_tmpl.render(post_data)
             
@@ -117,6 +117,7 @@ def render_content(base_path:str,
             lambda x: x.to_dict(),
             sorted([x for x in data if not x.is_index], reverse=True))
     )
+
     content['config'] = index_config
     render = history.render(content)
 
