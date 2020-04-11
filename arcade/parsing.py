@@ -112,7 +112,11 @@ def render_content(base_path:str,
 
     history = env.get_template("full_list.html")
     content=dict()
-    content['posts'] = list(map(lambda x: x.to_dict(), [x for x in reversed(data) if not x.is_index]))
+    content['posts'] = list(
+        map(
+            lambda x: x.to_dict(),
+            sorted([x for x in data if not x.is_index], reverse=True))
+    )
     content['config'] = index_config
     render = history.render(content)
 
