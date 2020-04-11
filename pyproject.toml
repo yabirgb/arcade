@@ -1,0 +1,32 @@
+[tool.poetry]
+name = "arcade-generator"
+version = "0.10.2"
+description = "A static site generator"
+authors = ["Yabir Benchakhtir <yabirg@protonmail.com>"]
+license = "MIT"
+readme = "README.md"
+classifiers = [
+    "Environment :: Console",
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Internet :: WWW/HTTP",
+]
+
+[tool.poetry.scripts]
+arcade = "arcade_generator.main:cli"
+    
+[tool.poetry.dependencies]
+python = "==3.*,>=3.6.0"
+jinja2 = "*"
+markdown = "^3.2.1"
+click = "^7.1.1"
+pyyaml = "^5.3.1"
+livereload = "^2.6.1"
+
+
+
+[tool.dephell.main]
+from = {format = "poetry", path = "pyproject.toml"}
+to = {format = "setuppy", path = "setup.py"}
+versioning = "semver"
