@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="arcade-generator",
-    version="0.0.3",
+    version="0.0.6",
     author="Yábir Benchakhtir",
     author_email="yabirg@protonmail.com",
     description="A static blog generator",
