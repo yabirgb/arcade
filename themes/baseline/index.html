@@ -17,7 +17,7 @@
   <ul id='post-list'>
     {% for post in posts %}
     <li clas='post-item'>
-      <a href='{{post.slug}}/'>{{ post.title }}</a>
+      <a href='/{{post.slug}}/'>{{ post.title }}</a>
 	  <span class='meta'>
 	    <time datetime='post.created'>
 	      {{ post.created_human }}

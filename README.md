@@ -13,7 +13,14 @@ Yet another static site generator.
 ## Installation
 
 ```
-pip install arcade-generator
+uv tool install arcade-generator
+arcade --help
+```
+
+If you prefer a project install:
+
+```
+uv pip install arcade-generator
 ```
 
 ## Commands
@@ -32,6 +39,22 @@ arcade build
 arcade watch
 ```
 
+## Development
+
+Install dev dependencies and run tests:
+
+```
+uv sync --group dev
+uv run pytest
+```
+
+Lint and type-check:
+
+```
+uv run ruff check .
+uv run ty check .
+```
+
 
 ## How to use
 
@@ -41,30 +64,25 @@ arcade watch
 arcade init
 ```
 
-2. Modify the configuration file. An example is 
+2. Modify the `arcade.toml` configuration file. An example is 
 
 ```
-author_name: 'Yábir García Benchakhtir'
-base_path: 'http://localhost:5500'
-page_name: "Yabir Garcia's Blog"
-theme: 'themes/baseline'
-social:
-  email:
-    icon: 'fa-envelope'
-    url: 'mailto:yabirg@protonmail.com'
-  github:
-    icon: 'fa-github'
-    url: 'https://github.com/yabirgb'
-  linkedin:
-    icon: 'fa-linkedin-square'
-    url: 'https://www.linkedin.com/in/yabirgb/'
-  mastodon:
-    icon: 'fa-mastodon'
-    url: 'https://mstdn.io/@yabirgb'
-  twitter:
-    icon: 'fa-twitter'
-    url: 'https://twitter.com/yabirgb'
+author_name = "Yabir Garcia Benchakhtir"
+base_path = "http://localhost:5500"
+page_name = "Yabir Garcia's Blog"
+theme = "themes/baseline"
+
+[social]
+email = { icon = "fa-envelope", url = "mailto:yabirg@protonmail.com" }
+github = { icon = "fa-github", url = "https://github.com/yabirgb" }
+linkedin = { icon = "fa-linkedin-square", url = "https://www.linkedin.com/in/yabirgb/" }
+mastodon = { icon = "fa-mastodon", url = "https://mstdn.io/@yabirgb" }
+twitter = { icon = "fa-twitter", url = "https://twitter.com/yabirgb" }
 ```
+
+Notes:
+- `base_path` is used to build absolute URLs in the Atom feed.
+- `theme` should point to a theme directory that contains the templates and `static/` assets.
 
 3. Create a index file
 

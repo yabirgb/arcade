@@ -1,52 +1,53 @@
-import os
-import yaml
-from typing import Dict, List, Union
-from definitions import required_folders
+from __future__ import annotations
+
+from pathlib import Path
+
+from .definitions import required_folders
 
 
 def generate_folder_structure(
-    base_path: str, folders=required_folders
+    base_path: str | Path,
+    folders: dict[str, str] = required_folders,
 ) -> None:
     """
     Create folder structure of arcade in the
     user folder structure
     """
 
-    def create_folder(path):
-        if not os.path.exists(path):
-            os.makedirs(path)
+    base = Path(base_path)
+
+    def create_folder(path: Path) -> None:
+        path.mkdir(parents=True, exist_ok=True)
 
     for folder in folders.values():
-        create_folder(os.path.join(base_path, folder))
+        create_folder(base / folder)
 
     # create index file
-    with open(os.path.join(base_path, folders["content"], 'index.md'), 'w') as f:
-        f.write("# Welcome to the arcade")
+    (base / folders["content"] / 'index.md').write_text("# Welcome to the arcade")
 
     
 
 
 def create_config_file(
-    base_path: str,
-    name: str = "arcade.yaml",
+    base_path: str | Path,
+    name: str = "arcade.toml",
 ) -> None:
-    config = {
-        "page_name": '',
-        "base_path": '',
-        "author_name": '',
-        "theme": 'themes/baseline',
-        "social": {
-            "twitter": None,
-            "github": None,
-            "email": None,
-            "mastodon": None,
-            "linkedin": None,
-        },
-    }
-
-    # Convert configuration to yaml format
-    config_yaml = yaml.dump(config)
+    config_toml = "\n".join(
+        [
+            'page_name = ""',
+            'base_path = ""',
+            'author_name = ""',
+            'theme = "themes/baseline"',
+            "",
+            "[social]",
+            'email = { icon = "", url = "" }',
+            'github = { icon = "", url = "" }',
+            'linkedin = { icon = "", url = "" }',
+            'mastodon = { icon = "", url = "" }',
+            'twitter = { icon = "", url = "" }',
+            "",
+        ]
+    )
 
     # Write to disc the configuration file
-    with open(os.path.join(base_path, name), "w") as f:
-        f.write(config_yaml)
+    (Path(base_path) / name).write_text(config_toml)

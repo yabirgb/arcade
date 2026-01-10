@@ -1,12 +1,12 @@
-import os
-import sys
+from __future__ import annotations
+
 import click
 
-from commands import init, watch, build
+from .commands import init, watch, build
 
 
 @click.group()
-def cli():
+def cli() -> None:
     pass
 
 
